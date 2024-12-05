@@ -6,10 +6,11 @@ import Profil from './App';
 import Mahasiswa from './Mahasiswa';
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
 import { faGithub } from '@fortawesome/free-brands-svg-icons';
-import { faUserGraduate, faUser } from '@fortawesome/free-solid-svg-icons';
+import { faUserGraduate, faUser, faPlusCircle, faUserPen } from '@fortawesome/free-solid-svg-icons';
 import { WebView } from 'react-native-webview';
 import Createdata from './Createdata';
 import Listdata from './Listdata';
+import Editdata from './Editdata'
 
 
 
@@ -24,11 +25,9 @@ function DataMahasiswaScreen() {
         <Listdata />
     );
 }
-function WebScreen() {
+function EditScreen() {
     return (
-        <WebView
-            source={{ uri: 'https://github.com/aliamaulana' }}
-        />
+        <Editdata />
     );
 }
 
@@ -38,11 +37,11 @@ export default function App() {
     return (
         <NavigationContainer>
             <Tab.Navigator>
-                <Tab.Screen name="Profil" component={HomeScreen}
+                <Tab.Screen name="Tambah Data" component={HomeScreen}
                     options={{
                         headerShown: false,
                         tabBarIcon: ({ color }) => (
-                            <FontAwesomeIcon icon={faUser} size={32} color={color} />
+                            <FontAwesomeIcon icon={faPlusCircle} size={32} color={color} />
                         ),
                     }} />
                 <Tab.Screen name="Data Mahasiswa" component={DataMahasiswaScreen} options={{
@@ -51,10 +50,10 @@ export default function App() {
                         <FontAwesomeIcon icon={faUserGraduate} size={32} color={color} />
                     ),
                 }} />
-                <Tab.Screen name="GitHub" component={WebScreen} options={{
+                <Tab.Screen name="Edit" component={EditScreen} options={{
                     headerShown: false,
                     tabBarIcon: ({ color }) => (
-                        <FontAwesomeIcon icon={faGithub} size={32} color={color} />
+                        <FontAwesomeIcon icon={faUserPen} size={32} color={color} />
                     ),
                 }} />
             </Tab.Navigator>
