@@ -1,79 +1,66 @@
-This is a new [**React Native**](https://reactnative.dev) project, bootstrapped using [`@react-native-community/cli`](https://github.com/react-native-community/cli).
+# JobFinder Jawa Tengah
 
-# Getting Started
+## Deskripsi Produk
 
->**Note**: Make sure you have completed the [React Native - Environment Setup](https://reactnative.dev/docs/environment-setup) instructions till "Creating a new application" step, before proceeding.
+**JobFinder Jawa Tengah** adalah aplikasi React Native yang dirancang untuk memudahkan pencarian pekerjaan dan pendaftaran kerja bagi masyarakat di Jawa Tengah. Aplikasi ini menyediakan daftar perusahaan beserta profilnya, lengkap dengan fitur peta interaktif untuk menunjukkan lokasi sebaran perusahaan di wilayah tersebut. Pengguna dapat mendaftar pekerjaan melalui fitur Apply Lowongan dan memperbarui data melalui fitur Edit Data.
 
-## Step 1: Start the Metro Server
+## Komponen Pembangun Produk
 
-First, you will need to start **Metro**, the JavaScript _bundler_ that ships _with_ React Native.
+- **React Native**: Framework utama untuk membangun aplikasi lintas platform dengan performa tinggi.
+- **React Navigation**: Digunakan untuk mengatur navigasi antar layar dalam aplikasi.
+- **Leaflet.js**: Library untuk menampilkan peta interaktif dengan lokasi perusahaan.
+- **JSON SERVER**: Database lokal untuk menyimpan data perusahaan dan informasi pelamar.
 
-To start Metro, run the following command from the _root_ of your React Native project:
 
-```bash
-# using npm
-npm start
+## Fitur Utama
 
-# OR using Yarn
-yarn start
-```
+- **Landing Page**: Halaman awal aplikasi yang berisi pengenalan tentang JobFinder Jawa Tengah.
+- **Daftar Perusahaan**: Menampilkan daftar perusahaan di Jawa Tengah, lengkap dengan tautan ke profil masing-masing perusahaan.
+- **Peta Lokasi Perusahaan**: Peta interaktif yang menunjukkan sebaran lokasi perusahaan di wilayah Jawa Tengah.
+- **Apply Lowongan**: Fitur untuk mendaftar pekerjaan dengan mengisi formulir informasi pribadi seperti nama, email, dan nomor telepon.
+- **Edit Data**: Fitur untuk memperbarui informasi pendaftaran pekerjaan, termasuk mengoreksi kesalahan input atau menghapus data.
 
-## Step 2: Start your Application
+## Sumber Data
 
-Let Metro Bundler run in its _own_ terminal. Open a _new_ terminal from the _root_ of your React Native project. Run the following command to start your _Android_ or _iOS_ app:
+- Profil perusahaan dan lokasi diambil dari berbagai sumber seperti Google Maps dan Website profil masing-masing perusahaab.
 
-### For Android
+## Tangkapan Layar Komponen Penting
 
-```bash
-# using npm
-npm run android
+1. **Landing Page**
+   ![Landing Page](assets/landing.png)
 
-# OR using Yarn
-yarn android
-```
+2. **Daftar Perusahaan**
+   ![Daftar Perusahaan](assets/list.png)
 
-### For iOS
+3. **Peta Lokasi Perusahaan**
+   ![Peta Perusahaan](assets/screenshots/maps.png)
 
-```bash
-# using npm
-npm run ios
+4. **Apply Lowongan**
+   ![Apply Lowongan](assets/screenshots/apply.png)
 
-# OR using Yarn
-yarn ios
-```
+5. **Edit Data**
+   ![Edit Data](assets/screenshots/edit.png)
 
-If everything is set up _correctly_, you should see your new app running in your _Android Emulator_ or _iOS Simulator_ shortly provided you have set up your emulator/simulator correctly.
+## Cara Menjalankan Aplikasi
 
-This is one way to run your app — you can also run it directly from within Android Studio and Xcode respectively.
+1. **Clone repositori ini**:
+   ```bash
+   git clone https://github.com/username/jobfinder-jawa-tengah.git
+   cd jobfinder-jawa-tengah
+   ```
 
-## Step 3: Modifying your App
+2. **Instal dependensi**:
+   ```bash
+   npm install
+   ```
 
-Now that you have successfully run the app, let's modify it.
+3. **Jalankan aplikasi** (menggunakan Expo):
+   ```bash
+   npx expo start
+   ```
 
-1. Open `App.tsx` in your text editor of choice and edit some lines.
-2. For **Android**: Press the <kbd>R</kbd> key twice or select **"Reload"** from the **Developer Menu** (<kbd>Ctrl</kbd> + <kbd>M</kbd> (on Window and Linux) or <kbd>Cmd ⌘</kbd> + <kbd>M</kbd> (on macOS)) to see your changes!
+4. **Lihat aplikasi di perangkat atau emulator**:
+   - Gunakan aplikasi Expo Go di perangkat Anda.
+   - Atau gunakan emulator Android/iOS yang telah dikonfigurasi.
 
-   For **iOS**: Hit <kbd>Cmd ⌘</kbd> + <kbd>R</kbd> in your iOS Simulator to reload the app and see your changes!
 
-## Congratulations! :tada:
-
-You've successfully run and modified your React Native App. :partying_face:
-
-### Now what?
-
-- If you want to add this new React Native code to an existing application, check out the [Integration guide](https://reactnative.dev/docs/integration-with-existing-apps).
-- If you're curious to learn more about React Native, check out the [Introduction to React Native](https://reactnative.dev/docs/getting-started).
-
-# Troubleshooting
-
-If you can't get this to work, see the [Troubleshooting](https://reactnative.dev/docs/troubleshooting) page.
-
-# Learn More
-
-To learn more about React Native, take a look at the following resources:
-
-- [React Native Website](https://reactnative.dev) - learn more about React Native.
-- [Getting Started](https://reactnative.dev/docs/environment-setup) - an **overview** of React Native and how setup your environment.
-- [Learn the Basics](https://reactnative.dev/docs/getting-started) - a **guided tour** of the React Native **basics**.
-- [Blog](https://reactnative.dev/blog) - read the latest official React Native **Blog** posts.
-- [`@facebook/react-native`](https://github.com/facebook/react-native) - the Open Source; GitHub **repository** for React Native.

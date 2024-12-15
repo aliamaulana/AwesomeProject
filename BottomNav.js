@@ -24,7 +24,7 @@ function DataMahasiswaScreen() {
 function WebScreen() {
   return (
     <WebView
-        source={{ uri: 'https://github.com/aliamaulana' }}
+        source={{ uri: 'https://leaflet-map-pgpbl-6-green.vercel.app/home' }}
       />
   );
 }

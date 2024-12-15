@@ -1,51 +1,61 @@
-import { View, Text, StyleSheet, TouchableOpacity, FlatList, Button, Alert } from 'react-native'
-import React, { useEffect, useState } from 'react'
-import { SafeAreaView } from 'react-native-safe-area-context'
-import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome'
-import { faGraduationCap, faChevronRight } from '@fortawesome/free-solid-svg-icons'
+import { View, Text, StyleSheet, TouchableOpacity, FlatList, Button, Alert, Linking } from 'react-native';
+import React, { useEffect, useState } from 'react';
+import { SafeAreaView } from 'react-native-safe-area-context';
+import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
+import { faUsers, faChevronRight } from '@fortawesome/free-solid-svg-icons';
 
 
 const Listdata = () => {
-    const jsonUrl = 'http://10.0.2.2:3000/mahasiswa';
+    const jsonUrl = 'http://10.0.2.2:3000/perusahaan';
     const [isLoading, setLoading] = useState(true);
-    const [dataUser, setDataUser] = useState({});
+    const [dataUser, setDataUser] = useState([]);
     const [refresh, setRefresh] = useState(false);
 
     useEffect(() => {
-        fetch(jsonUrl)
-            .then((response) => response.json())
-            .then((json) => {
-                console.log(json)
-                setDataUser(json)
-            })
-            .catch((error) => console.error(error))
-            .finally(() => setLoading(false));
+        fetchData();
     }, []);
 
-    function refreshPage() {
+    const fetchData = () => {
+        setLoading(true);
         fetch(jsonUrl)
             .then((response) => response.json())
             .then((json) => {
-                console.log(json)
-                setDataUser(json)
+                setDataUser(json);
             })
             .catch((error) => console.error(error))
             .finally(() => setLoading(false));
-    }
+    };
 
-    function deleteData(id) {
-        fetch(jsonUrl + '/' + id, {
+    const deleteData = (id) => {
+        fetch(`${jsonUrl}/${id}`, {
             method: 'DELETE',
         })
             .then((response) => response.json())
-            .then((json) => {
-                console.log(json);
-                alert('Data terhapus');
-                refreshPage();
+            .then(() => {
+                Alert.alert('Sukses', 'Data berhasil dihapus');
+                fetchData();
             })
-    }
+            .catch((error) => {
+                console.error(error);
+                Alert.alert('Error', 'Gagal menghapus data');
+            });
+    };
 
+    const openProfile = (url) => {
+        if (!url) {
+            Alert.alert('Error', 'URL tidak ditemukan');
+            return;
+        }
 
+        // Tambahkan protokol jika tidak ada
+        const validUrl = url.startsWith('http://') || url.startsWith('https://') ? url : `http://${url}`;
+
+        Linking.openURL(validUrl)
+            .catch((error) => {
+                console.error('Error saat membuka URL:', error);
+                Alert.alert('Error', 'Terjadi kesalahan saat membuka URL');
+            });
+    };
 
 
     return (
@@ -59,48 +69,52 @@ const Listdata = () => {
                     <FlatList
                         style={{ marginBottom: 0 }}
                         data={dataUser}
-                        onRefresh={() => { refreshPage() }}
+                        onRefresh={fetchData}
                         refreshing={refresh}
-                        keyExtractor={({ id }, index) => id}
+                        keyExtractor={({ id }) => id.toString()}
                         renderItem={({ item }) => (
                             <View>
-                                <TouchableOpacity>
+                                <TouchableOpacity onPress={() => openProfile(item.profil)}>
                                     <View style={styles.card}>
                                         <View style={styles.avatar}>
-                                            <FontAwesomeIcon icon={faGraduationCap} size={50} color={item.color} />
+                                            <FontAwesomeIcon icon={faUsers} size={30} color={item.color || 'black'} />
                                         </View>
                                         <View>
-                                            <Text style={styles.cardtitle}>{item.first_name} {item.last_name}</Text>
-                                            <Text>{item.kelas}</Text>
-                                            <Text>{item.gender}</Text>
+                                            <Text style={styles.cardtitle}>Nama Perusahaan:</Text>
+                                            <Text style={styles.profil}>{item.nama}</Text>
+
+                                            <Text style={styles.cardtitle}>Profil Perusahaan:</Text>
+                                            <Text>{item.profil}</Text>
                                         </View>
                                         <View style={{ flex: 1, justifyContent: 'center', alignItems: 'flex-end' }}>
-                                            <FontAwesomeIcon icon={faChevronRight} size={20} />
+                                        
                                         </View>
                                     </View>
                                 </TouchableOpacity>
 
-                                <View style={styles.form}>
-                                    <Button title="Hapus"
-                                        onPress={() => Alert.alert('Hapus data', 'Yakin akan menghapus data ini?', [
-                                            { text: 'Tidak', onPress: () => console.log('button tidak') },
-                                            { text: 'Ya', onPress: () => deleteData(item.id) },
-                                        ])}
+
+                                {/* <View style={styles.form}>
+                                    <Button
+                                        title="Hapus"
+                                        onPress={() =>
+                                            Alert.alert('Hapus data', 'Yakin akan menghapus data ini?', [
+                                                { text: 'Tidak', onPress: () => console.log('Batal hapus') },
+                                                { text: 'Ya', onPress: () => deleteData(item.id) },
+                                            ])
+                                        }
                                         color={'red'}
                                     />
-                                </View>
-
+                                </View> */}
                             </View>
                         )}
                     />
                 </View>
             )}
         </SafeAreaView>
+    );
+};
 
-    )
-}
-
-export default Listdata
+export default Listdata;
 
 const styles = StyleSheet.create({
     title: {
@@ -125,20 +139,17 @@ const styles = StyleSheet.create({
         borderRadius: 10,
         backgroundColor: 'white',
         shadowColor: '#000',
-        shadowOffset: {
-            width: 1,
-            height: 1,
-        },
-        shadowOpacity: 0.20,
+        shadowOffset: { width: 1, height: 1 },
+        shadowOpacity: 0.2,
         shadowRadius: 1.41,
         elevation: 2,
         marginHorizontal: 20,
-        marginVertical: 7
+        marginVertical: 7,
+        overflow: 'hidden', // Prevents text overflow
+        flexWrap: 'wrap', // Allow text to wrap inside the box
     },
     form: {
-        paddingHorizontal: 20,
-        paddingTop: 5,
-        paddingBottom: 20,
+        padding: 10,
+        marginBottom: 20,
     },
-})
-
+});

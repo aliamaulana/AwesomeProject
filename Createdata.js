@@ -1,24 +1,30 @@
-import React, { useState } from 'react'
+import React, { useState } from 'react';
 import { SafeAreaView, View, ScrollView, TextInput, Text, Button, StyleSheet } from 'react-native';
 
 const Createdata = () => {
-    // IP emulator untuk mengakses localhost komputer
-    const jsonUrl = 'http://10.0.2.2:3000/mahasiswa';
-    const [first_name, setFirstName] = useState('');
-    const [last_name, setLastName] = useState('');
-    const [kelas, setKelas] = useState('');
-    const [gender, setGender] = useState('');
-    const [email, setEmail] = useState('');
+    const lokerUrl = 'http://10.0.2.2:3001/loker';
 
+    // State untuk input form
+    const [name, setName] = useState('');
+    const [email, setEmail] = useState('');
+    const [phone, setPhone] = useState('');
+    const [position, setPosition] = useState('');
+    const [resumeLink, setResumeLink] = useState('');
+    const [message, setMessage] = useState('');
+
+    // Fungsi submit untuk mengirimkan data ke API
     const submit = () => {
         const data = {
-            first_name: first_name,
-            last_name: last_name,
+            name: name,
             email: email,
-            kelas: kelas,
-            gender: gender,
+            phone: phone,
+            position: position,
+            resumeLink: resumeLink,
+            message: message,
         };
-        fetch('http://10.0.2.2:3000/mahasiswa', {
+
+        // Mengirim data ke API dengan method POST
+        fetch(lokerUrl, {
             method: 'POST',
             headers: {
                 'Accept': 'application/json',
@@ -26,49 +32,74 @@ const Createdata = () => {
             },
             body: JSON.stringify(data)
         })
-            .then((response) => response.json())
-            .then((json) => {
-                console.log(json);
-                alert('Data tersimpan');
-                setFirstName('');
-                setLastName('');
-                setEmail('');
-                setKelas('');
-                setGender('');
-            })
+        .then((response) => response.json())
+        .then((json) => {
+            console.log(json);
+            alert('Lamaran kerja berhasil dikirim');
+            setName('');
+            setEmail('');
+            setPhone('');
+            setPosition('');
+            setResumeLink('');
+            setMessage('');
+        })
+        .catch((error) => console.error(error));
     }
 
     return (
         <SafeAreaView>
             <View>
-                <Text style={styles.title}>Tambah Data Mahasiswa</Text>
                 <ScrollView style={styles.form}>
-                    <TextInput style={styles.input} placeholder="Nama Depan" value={first_name} onChangeText={(value) => setFirstName(value)} />
-                    <TextInput style={styles.input} placeholder="Nama Belakang" value={last_name} onChangeText={(value) => setLastName(value)} />
-                    <TextInput style={styles.input} placeholder="Kelas" value={kelas} onChangeText={(value) => setKelas(value)} />
-                    <TextInput style={styles.input} placeholder="Jenis Kelamin" value={gender} onChangeText={(value) => setGender(value)} />
-                    <TextInput style={styles.input} placeholder="Email" value={email} onChangeText={(value) => setEmail(value)} />
-                    <Button title="Simpan" style={styles.button} onPress={submit} />
+                    <TextInput
+                        style={styles.input}
+                        placeholder="Nama Lengkap"
+                        value={name}
+                        onChangeText={(value) => setName(value)}
+                    />
+                    <TextInput
+                        style={styles.input}
+                        placeholder="Email"
+                        keyboardType="email-address"
+                        value={email}
+                        onChangeText={(value) => setEmail(value)}
+                    />
+                    <TextInput
+                        style={styles.input}
+                        placeholder="Nomor Telepon"
+                        keyboardType="phone-pad"
+                        value={phone}
+                        onChangeText={(value) => setPhone(value)}
+                    />
+                    <TextInput
+                        style={styles.input}
+                        placeholder="Posisi yang Dilamar"
+                        value={position}
+                        onChangeText={(value) => setPosition(value)}
+                    />
+                    <TextInput
+                        style={styles.input}
+                        placeholder="Tautan Resume (URL)"
+                        value={resumeLink}
+                        onChangeText={(value) => setResumeLink(value)}
+                    />
+                    <TextInput
+                        style={[styles.input, styles.textArea]}
+                        placeholder="Pesan Tambahan"
+                        multiline
+                        numberOfLines={4}
+                        value={message}
+                        onChangeText={(value) => setMessage(value)}
+                    />
+                    <Button title="Kirim Lamaran" style={styles.button} onPress={submit} />
                 </ScrollView>
             </View>
         </SafeAreaView>
     )
 }
 
-export default Createdata
-
 const styles = StyleSheet.create({
-    title: {
-        paddingVertical: 12,
-        backgroundColor: '#333',
-        color: 'white',
-        fontSize: 20,
-        fontWeight: 'bold',
-        textAlign: 'center',
-    },
     form: {
         padding: 10,
-        marginBottom: 100,
     },
     input: {
         borderWidth: 1,
@@ -81,4 +112,6 @@ const styles = StyleSheet.create({
     button: {
         marginVertical: 10,
     }
-})
+});
+
+export default Createdata;
