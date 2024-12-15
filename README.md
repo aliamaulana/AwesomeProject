@@ -10,7 +10,8 @@
 - **React Navigation**: Digunakan untuk mengatur navigasi antar layar dalam aplikasi.
 - **Leaflet.js**: Library untuk menampilkan peta interaktif dengan lokasi perusahaan.
 - **JSON SERVER**: Database lokal untuk menyimpan data perusahaan dan informasi pelamar.
-
+- **IONIC**: Library yang digunakan untuk pembuatan Peta.
+- **Vercel**: Platform yang digunakan untuk publikasi halaman peta.
 
 ## Fitur Utama
 
@@ -23,23 +24,26 @@
 ## Sumber Data
 
 - Profil perusahaan dan lokasi diambil dari berbagai sumber seperti Google Maps dan Website profil masing-masing perusahaab.
+---
 
 ## Tangkapan Layar Komponen Penting
 
-1. **Landing Page**
-   ![Landing Page](assets/landing.png)
+### 1. Landing Page  
+<img src="assets/landing.png" alt="Landing Page" width="300" height="600" />
 
-2. **Daftar Perusahaan**
-   ![Daftar Perusahaan](assets/list.png)
+### 2. Daftar Perusahaan  
+<img src="assets/list.png" alt="Daftar Perusahaan" width="300" height="600" />
 
-3. **Peta Lokasi Perusahaan**
-   ![Peta Perusahaan](assets/screenshots/maps.png)
+### 3. Peta Lokasi Perusahaan  
+<img src="assets/maps.png" alt="Peta Perusahaan" width="300" height="600" />
 
-4. **Apply Lowongan**
-   ![Apply Lowongan](assets/screenshots/apply.png)
+### 4. Apply Lowongan  
+<img src="assets/apply.png" alt="Apply Lowongan" width="300" height="600" />
 
-5. **Edit Data**
-   ![Edit Data](assets/screenshots/edit.png)
+### 5. Edit Data  
+<img src="assets/edit.png" alt="Edit Data" width="300" height="600" />
+
+---
 
 ## Cara Menjalankan Aplikasi
 
